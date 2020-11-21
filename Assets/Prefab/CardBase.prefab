@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 9163137112908075512}
   - component: {fileID: 6399324722265679154}
   - component: {fileID: 6676602841520902736}
+  - component: {fileID: 2891957984503518419}
   m_Layer: 0
   m_Name: CardBase
   m_TagString: Untagged
@@ -224,10 +225,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
+  suma: {fileID: 0}
   value: 0
   speed: 0.4
   esta: 0
   valueText: {fileID: 6372867778497980044}
+--- !u!65 &2891957984503518419
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885855420044461287}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10955714, y: 0.17, z: 0.0009999999}
+  m_Center: {x: 0, y: 0, z: 0.0011550041}
 --- !u!1 &7837885129405748982
 GameObject:
   m_ObjectHideFlags: 0
