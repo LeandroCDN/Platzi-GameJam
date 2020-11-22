@@ -20,14 +20,21 @@ public class Card : MonoBehaviour
 
     private void Start()
     {
-        target = PositionsCards.posId[id];        
-        value = (int)((Random.Range(1, 50)) + 0.5);
+        target = PositionsCards.posId[id];
+        if (id != 5)
+        {
+            value = (int)((Random.Range(1, 50)) + 0.5);
+        }
+        else
+        {
+            value = (int)((Random.Range(100, 102)));
+        }
     }
 
     private void Update()
     {
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(dir * speed * Time.deltaTime, Space.World);
         transform.rotation = target.rotation;
         valueText.text = "" + value;
     }
@@ -40,8 +47,12 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GameManager.gameManager.result = value + GameManager.gameManager.cardsOnTable[6].value; ;
-        Destroy(GameManager.gameManager.cardsOnTable[6].gameObject);
-        Destroy(gameObject);
+        if (id != 6)
+        {
+            result = value + GameManager.gameManager.cardsOnTable[6].value;
+            GameManager.gameManager.IsGameOver(result);
+            Destroy(GameManager.gameManager.cardsOnTable[6].gameObject);
+            Destroy(gameObject);
+        }
     }
 }

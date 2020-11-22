@@ -225,9 +225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
-  suma: {fileID: 0}
+  result: 0
   value: 0
-  speed: 0.4
+  speed: 2.5
   esta: 0
   valueText: {fileID: 6372867778497980044}
 --- !u!65 &2891957984503518419
