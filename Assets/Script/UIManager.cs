@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager uiManager;
 
     public  float timeStart = 15;
-    public Text countDown;
+    public Text countDown;       
 
     
     private void Awake()
@@ -23,18 +23,23 @@ public class UIManager : MonoBehaviour
         {
             uiManager = this;
         }
-        DontDestroyOnLoad(this);
+        
     }
 
     private void Start()
     {
         countDown.text = timeStart.ToString();
+        
     }
 
     private void Update()
     {
         timeStart -= Time.deltaTime;
         countDown.text = "TIME: " + Mathf.Round(timeStart).ToString();
+
+        //Sounds
+        //FindObjectOfType<AudioManager>().Play("lento");
+      
     }
 
     public  void TotalPoints(int result)

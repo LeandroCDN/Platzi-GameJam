@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,7 @@ public class GameManager : MonoBehaviour
     public  List<Card> cardsOnTable = new List<Card>();
 
     public int totalPares = 0;
-    public bool paridad = false;
-
-    
+    public bool paridad = false;    
 
     private void Awake()
     {
@@ -28,7 +27,8 @@ public class GameManager : MonoBehaviour
         {
             gameManager = this;
         }
-        DontDestroyOnLoad(this);
+        
+        
     }
 
     private void Start()
@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
 
         totalPares = 0;        
         Paridadtotal();
-
     }
 
     private void Update()
@@ -66,6 +65,11 @@ public class GameManager : MonoBehaviour
         {
             paridad = false;
         }
+
+        if(UIManager.uiManager.timeStart < 0)
+        {
+            GameOver();
+        }
     }
 
     void Spawncard()
@@ -79,8 +83,7 @@ public class GameManager : MonoBehaviour
             {
                 card.speed += 2;
             }
-        }
-        
+        }        
     }
 
     public void IsGameOver(int results)
@@ -94,16 +97,40 @@ public class GameManager : MonoBehaviour
         else
         {
             UIManager.uiManager.TotalPoints(results);
-            UIManager.uiManager.timeStart += 2;
-        }
-
-        
+            if (UIManager.uiManager.points < 250)
+            {
+                UIManager.uiManager.timeStart += 4;
+            }
+            else
+            {
+                if (UIManager.uiManager.points < 500)
+                {
+                    UIManager.uiManager.timeStart += 3;
+                }
+                else
+                {
+                    if (UIManager.uiManager.points < 1000)
+                    {
+                        UIManager.uiManager.timeStart += 2;
+                    }
+                    else
+                    {
+                        if (UIManager.uiManager.points >= 1000)
+                        {
+                            UIManager.uiManager.timeStart += 1;
+                        }
+                    }
+                }
+            }
+            
+        }       
 
     }
 
     public void GameOver()
     {
         Debug.Log("TE DIO UN RESULTADO PAR >>>> GAME OVER");
+        SceneManager.LoadScene("GameOverMenu");
     }
 
     public void Paridadtotal()
@@ -118,5 +145,19 @@ public class GameManager : MonoBehaviour
         }        
     }
 
-    
+    public void Reparir()
+    {
+        if (paridad)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Destroy(cardsOnTable[i].gameObject);
+            }
+            UIManager.uiManager.timeStart += 10;
+        }
+        else
+        {
+            GameOver();
+        }
+    }
 }
