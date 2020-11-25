@@ -92,10 +92,12 @@ public class GameManager : MonoBehaviour
 
         if ((results % 2) == 0)
         {
-            GameOver();
+            UIManager.uiManager.panel.enabled = true;
+            Invoke("GameOver", 1.5f);            
         }
         else
         {
+            Stadistics.stadistics.sumasImp++;
             UIManager.uiManager.TotalPoints(results);
             if (UIManager.uiManager.points < 250)
             {
@@ -130,7 +132,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("TE DIO UN RESULTADO PAR >>>> GAME OVER");
-        SceneManager.LoadScene("GameOverMenu");
+        SceneManager.LoadScene("GameOver");
     }
 
     public void Paridadtotal()

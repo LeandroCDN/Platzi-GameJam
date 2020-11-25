@@ -19,10 +19,12 @@ public class Card : MonoBehaviour
 
     public Animator animator;
     public AudioSource audioSource;
-    
+
+    ParticleSystem destroyParticle;
 
     private void Start()
     {
+        destroyParticle = GameObject.Find("Particles").GetComponent<ParticleSystem>();
         target = PositionsCards.posId[id];
         if (id != 5)
         {
@@ -48,25 +50,32 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        audioSource.Play();
+        audioSource.Play();        
+        
 
-
-        if (id != 6 && id!=5)
+        
+        if(id < 6)
         {
             result = value + GameManager.gameManager.cardsOnTable[6].value;
+            Stadistics.stadistics.ultMano = GameManager.gameManager.cardsOnTable[6].value;
+            Stadistics.stadistics.ultSeleccion = value;
+            destroyParticle.transform.position = this.transform.position;
+            destroyParticle.Play();
             GameManager.gameManager.IsGameOver(result);
             Destroy(GameManager.gameManager.cardsOnTable[6].gameObject);
-            
+        }
+
+        if (id != 6 && id!=5 && id < 6)
+        {            
+                        
             Destroy(gameObject,0.2f);
         }
-        if(id == 5)
+        if(id == 5 && id < 6)
         {
             animator.enabled = true;
-            result = value + GameManager.gameManager.cardsOnTable[6].value;
-            GameManager.gameManager.IsGameOver(result);
-            Destroy(GameManager.gameManager.cardsOnTable[6].gameObject);
             Destroy(gameObject,1.5f);            
         }
         
+
     }
 }
