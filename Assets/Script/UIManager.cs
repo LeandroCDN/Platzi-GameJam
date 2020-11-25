@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public int points = 0;    
+    public int points = 0;
     public Text pointsText;
     public static UIManager uiManager;
 
-    public  float timeStart = 15;
-    public Text countDown;       
+    public float timeStart = 15;
+    public Text countDown;
+
+    //GameOver
+    public Image panel;
+
+    //TUTORIAL
+    public Text[] tutorial;
+    public Button siguiente;
+    public int page =  1;
 
     
     private void Awake()
