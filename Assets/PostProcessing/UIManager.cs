@@ -68,6 +68,19 @@ public class UIManager : MonoBehaviour
         //FindObjectOfType<AudioManager>().Play("lento");
       
 
+        //POST PROCESSING EFFECTS
+        SetEffects();
+    }
+
+    public  void TotalPoints(int result)
+    {
+        points = result + points;
+        pointsText.text = "Puntaje: " + points;
+    }
+
+    //POST PROCESSING EFFECTS
+    void SetEffects()
+    {
         //POST PROCESSING  se activa cuando el tiempo es menor a 10s y se resetea cuando es mayor a 10s
         if(timeStart >= 10)
         {
@@ -83,11 +96,5 @@ public class UIManager : MonoBehaviour
 
             Debug.Log("-10");
         }
-    }
-
-    public  void TotalPoints(int result)
-    {
-        points = result + points;
-        pointsText.text = "Puntaje: " + points;
     }
 }
