@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Card : MonoBehaviour
 {
-    public int id; //lugar que ocupara la carta y forma para identificarla  
+    public int id; //lugar que ocupara la carta y forma para identificarla
 
     public int result;
     
@@ -19,10 +19,13 @@ public class Card : MonoBehaviour
 
     public Animator animator;
     public AudioSource audioSource;
-    
 
+    ParticleSystem destroyParticle;
+    
     private void Start()
     {
+        destroyParticle = GameObject.Find("Particles").GetComponent<ParticleSystem>();
+
         target = PositionsCards.posId[id];
         if (id != 5)
         {
@@ -50,9 +53,11 @@ public class Card : MonoBehaviour
     {
         audioSource.Play();
 
-
         if (id != 6 && id!=5)
         {
+            destroyParticle.transform.position = this.transform.position;
+            destroyParticle.Play();
+
             result = value + GameManager.gameManager.cardsOnTable[6].value;
             GameManager.gameManager.IsGameOver(result);
             Destroy(GameManager.gameManager.cardsOnTable[6].gameObject);
@@ -61,6 +66,7 @@ public class Card : MonoBehaviour
         }
         if(id == 5)
         {
+            
             animator.enabled = true;
             result = value + GameManager.gameManager.cardsOnTable[6].value;
             GameManager.gameManager.IsGameOver(result);
