@@ -98,7 +98,9 @@ public class GameManager : MonoBehaviour
         else
         {
             Stadistics.stadistics.sumasImp++;
+            
             UIManager.uiManager.TotalPoints(results);
+
             if (UIManager.uiManager.points < 250)
             {
                 UIManager.uiManager.timeStart += 4;
